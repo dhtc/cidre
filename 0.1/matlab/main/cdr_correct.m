@@ -1,4 +1,4 @@
-function cdr_correct(model,options)
+function Icorrected_out = cdr_correct(model,options)
 % Using the model learned in cdr_cidreModel, this function corrects the
 % source images and saves the corrected images to the destination folder
 % provided in the options structure.
@@ -22,27 +22,10 @@ function cdr_correct(model,options)
 
 
 % if the destination folder doesn't exist, make it
-if ~exist(options.folder_destination, 'dir')
-    mkdir(options.folder_destination);
-end
-
-% make sure the path ends with a slash
-if ~strcmpi(options.folder_destination(end), '/') && ~strcmpi(options.folder_destination(end), '\')
-    options.folder_destination(end+1) = '/';
-end
 
 if isempty(options.correction_mode)
     options.correction_mode = 0;
 end
-
-
-
-% save the correction model to the destination folder
-filename = sprintf('%s%s', options.folder_destination, 'cidre_model.mat');
-save(filename, 'model', 'options');
-fprintf(' Saved the correction model to %s\n', filename);
-
-
 
 % loop through all the source images, correct them, and write them to the 
 % destination folder
@@ -54,11 +37,12 @@ switch options.correction_mode
     case 2
         str = 'direct';
 end
-fprintf(' Writing %s corrected images to %s\n ', upper(str), options.folder_destination);
+
 t1 = tic;
 for z = 1:options.num_images_provided
     if mod(z,100) == 0; fprintf('.'); end  % progress to the command line
-    I = imread([options.folder_source options.filenames{z}]);
+    
+    I = options.raw_images(:, :, z);
     imageClass = class(I);
     I = double(I);
     
@@ -79,12 +63,8 @@ for z = 1:options.num_images_provided
     
     
     Icorrected = cast(Icorrected, imageClass);
-    [pth name ext] = fileparts(options.filenames{z});
-    filename = sprintf('%s%s%s', options.folder_destination, name, ext);
-    %fprintf('writing %s\n', filename);
-    imwrite(Icorrected, filename);
+    Icorrected_out{z} = Icorrected;
 end
-
 
 fprintf(' finished in %1.2fs.\n', toc(t1));
 
