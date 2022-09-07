@@ -16,10 +16,10 @@ function [correct_images, model] = cidre(source, software_path, varargin)
 %         DESTINATION specifying a folder after SOURCE determines where the
 %                corrected images and correction model will be written.
 %       
-%         'correction_mode' (default = 2) specifies the type of correction
+%         'correction_mode' (default = 0) specifies the type of correction
 %                to perform: 2 "Direct" subtracts the zero-light term and 
 %                divides the illumination gain. 1 "Dynamic range corrected" 
-%                retains the intensity range of the original images. 2 
+%                retains the intensity range of the original images. 0 
 %                "Zero-light preserved" retains the original intensity
 %                range and zero-light level of the original images.
 %

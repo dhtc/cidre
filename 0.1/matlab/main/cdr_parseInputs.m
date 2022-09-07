@@ -70,13 +70,6 @@ for i = 1:numel(v)
     
 end
 
-
-% check for other important input warnings 
-if isempty(options.folder_destination)
-    warning('CIDRE:parseInput', 'No destination folder was specified. CIDRE will not store corrected images.\n');
-end
-
-
 % sort the options alphabetically so they are easier to read
 options = orderfields(options);
 
