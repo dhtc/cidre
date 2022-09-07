@@ -38,7 +38,6 @@ options.number_of_quantiles     = 200;
 
 
 % handle the variable input parameters, provided in (string, param) pairs
-v
 for i = 1:2:numel(v)
     switch lower(v{i})
         case 'lambda_vreg'
@@ -77,7 +76,6 @@ options = orderfields(options);
 
 
 function param = getParam(v,i)
-v{i}
 if i+1 <= numel(v)
     if isnumeric(v{i+1})
         param = v{i+1};
