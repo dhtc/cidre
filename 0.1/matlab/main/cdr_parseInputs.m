@@ -38,8 +38,8 @@ options.number_of_quantiles     = 200;
 
 
 % handle the variable input parameters, provided in (string, param) pairs
-for i = 1:numel(v)
-
+v
+for i = 1:2:numel(v)
     switch lower(v{i})
         case 'lambda_vreg'
             options.lambda_vreg = getParam(v,i);            
@@ -61,8 +61,9 @@ for i = 1:numel(v)
                     options.folder_destination = v{i};
                 end
             else
-                param = getParam(v,i);
-                warning('CIDRE:parseInput', 'Unrecognized paramaeter "%s" value: %1.3g\n', v{i}, param);
+                continue
+%                 param = getParam(v,i);
+%                 warning('CIDRE:parseInput', 'Unrecognized paramaeter "%s" value: %1.3g\n', v{i}, param);
             end
     end
     
@@ -76,7 +77,7 @@ options = orderfields(options);
 
 
 function param = getParam(v,i)
-
+v{i}
 if i+1 <= numel(v)
     if isnumeric(v{i+1})
         param = v{i+1};
