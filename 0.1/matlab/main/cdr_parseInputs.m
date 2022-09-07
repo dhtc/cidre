@@ -80,6 +80,8 @@ function param = getParam(v,i)
 if i+1 <= numel(v)
     if isnumeric(v{i+1})
         param = v{i+1};
+    elseif isempty(v{i+1})
+        param = v{i+1};
     else
         warning('CIDRE:parseInput', 'Expected numeric value\n');
     end
